@@ -1,0 +1,27 @@
+   //左上から右下
+    if (cell1.classList.contains('pressed') && cell2.classList.contains('pressed') && cell3.classList.contains('pressed')) {
+        if (cell1.innerText === cell2.innerText && cell2.innerText === cell3.innerText) {
+            alert("勝者は " + cell1.innerText + " です！");
+
+            for (let i = 0; i < 3; i++) {
+                banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
+            }
+            gameEnded=true;
+            return;
+        }
+    }
+
+    //右上から左下
+    if (cell4.classList.contains('pressed') && cell5.classList.contains('pressed') && cell6.classList.contains('pressed')) {
+        if (cell4.innerText === cell5.innerText && cell5.innerText === cell6.innerText) {
+            alert("勝者は " + cell4.innerText + " です！");
+            
+            for(let i = 0; i < 3; i++){
+                banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
+            }
+
+            gameEnded=true;
+            return;
+        }
+
+    }

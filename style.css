@@ -1,0 +1,43 @@
+body{
+    background-color: blueviolet;
+}
+
+.winning-cell{
+    background-color: yellow;
+}
+
+table{
+    border-spacing: 5px 5px;
+    font-size: 1000%;
+    color: blueviolet;
+    text-align: center;
+}
+
+td{
+    border-style: solid;
+    border-color: black;
+    background-color: white;
+    font-size: 50%;
+    width: 135px;
+    height: 135px;
+}
+
+.moji{
+    opacity: 0;
+}
+
+.moji:hover{
+    opacity: 0.5;
+}
+
+div{
+    text-align: center;
+    padding-top: 50px;
+}
+
+button{
+    font-size: 120%;
+    color:blueviolet;
+    width: 15em;
+    height: 3em;
+}
