@@ -114,7 +114,7 @@ function CheckWin() {
     if(horizontalWinner && verticalWinner){
         let winner = horizontalWinner || verticalWinner;
 
-        alert("勝者は" + winner + "です！");
+        alert("圧倒的勝者は" + winner + "です！");
 
         gameEnded = true;
     }else if(horizontalWinner){         //横方向の勝利の時
@@ -148,7 +148,7 @@ function CheckWin() {
     cell4.innerText === cell5.innerText && cell5.innerText === cell6.innerText;
 
     if(diagonal1Winner && diagonal2Winner){
-        alert("勝者は" + cell5.innerText + "です！");
+        alert("圧倒的勝者は" + cell5.innerText + "です！");
         for(let i = 0; i < 3; i++){
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
