@@ -36,12 +36,7 @@ function Osita(Cell){
 //tableの文字を入れる
 function insertCharacter(c){
     let ban_moji = document.querySelectorAll('.moji');
-    //moji クラスが付与されているHTML要素の中に文字を代入
-    //querySelectorAll 引数にCSSセレクタを代入すると合致したHTML要素リストが変える
-    //forEachメソッド 配列の各要素に対して処理を行う
-    //innerText or innerHTML HTML要素の中に文字列を代入できる
-
-    // classList.add classList.remove classList.contains("moji") 
+   
     ban_moji.forEach(function(moji){
         moji.innerText= c;
     });
