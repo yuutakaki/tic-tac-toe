@@ -1,5 +1,16 @@
+html{
+    height: 100%;
+}
+
 body{
     background :radial-gradient(pink,blueviolet)
+}
+
+h2{
+    text-align: center;
+    font-size: 80px;
+    font-family: Georgia, serif;
+    margin-bottom: 10px;
 }
 
 .winning-cell{
@@ -10,17 +21,19 @@ table{
     border-spacing: 5px 5px;
     font-size: 1000%;
     color: blueviolet;
-    text-align: center;
+    display: none;
 }
 
 td{
     border-style: solid;
     border-color: black;
     background-color: white;
+    text-align: center;
     font-size: 50%;
     width: 135px;
     height: 135px;
 }
+
 
 .moji{
     opacity: 0;
@@ -31,13 +44,21 @@ td{
 }
 
 div{
-    text-align: center;
-    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
 }
 
-button{
+button#ResetButton{
     font-size: 120%;
     color:blueviolet;
     width: 15em;
     height: 3em;
+    display: none;
+}
+
+button#NewGame{
+    font-size: 50px;
+    color: blueviolet;
+    display: none;
 }

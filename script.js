@@ -14,7 +14,6 @@ for(let x = 0;x<3;x++){
 }
 
 let gameEnded = false;
-
 let currentPlayer = "O";
 
 //クリック処理
@@ -43,7 +42,8 @@ function insertCharacter(c){
 
 }
 
-let Rb = document.getElementById("Reset Button");
+//リセットボタンクリック時
+let Rb = document.getElementById("ResetButton");
 Rb.addEventListener("click",Reset);
 
 function Reset(){
@@ -63,7 +63,20 @@ function Reset(){
     // プレイヤーを初期状態に戻す
     currentPlayer = "O";
     insertCharacter(currentPlayer);
-}   
+} 
+
+//NewGameボタンクリック時
+let NB = document.getElementById("NewGame");
+NB.addEventListener("click",NewGame);
+let drawMessage = document.getElementById("draw-message");
+
+function NewGame(){
+    drawMessage.style.display = "none";
+    NB.style.display = "none";
+
+    init();
+    Reset();
+}
 
 
 //勝利判定
@@ -108,20 +121,17 @@ function CheckWin() {
     //縦横同時勝利の時の判定
     if(horizontalWinner && verticalWinner){
         let winner = horizontalWinner || verticalWinner;
-
-        alert("圧倒的勝者は" + winner + "です！");
+        displayVictoryMessage(winner);
 
         gameEnded = true;
     }else if(horizontalWinner){         //横方向の勝利の時
         let winner = horizontalWinner
-
-        alert("勝者は" + winner + "です！");
+        displayVictoryMessage(winner);
 
         gameEnded = true;
     }else if(verticalWinner){           //縦方向の勝利の時
         let winner = verticalWinner
-
-        alert("勝者は" + winner + "です！");
+        displayVictoryMessage(winner);
 
         gameEnded = true;
     }
@@ -143,7 +153,8 @@ function CheckWin() {
     cell4.innerText === cell5.innerText && cell5.innerText === cell6.innerText;
 
     if(diagonal1Winner && diagonal2Winner){
-        alert("圧倒的勝者は" + cell5.innerText + "です！");
+        let winner = cell5.innerText;
+        displayVictoryMessage(winner);
         for(let i = 0; i < 3; i++){
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
@@ -153,7 +164,8 @@ function CheckWin() {
     }
 
     if (diagonal1Winner) {
-        alert("勝者は " + cell1.innerText + " です！");
+        let winner = cell1.innerText;
+        displayVictoryMessage(winner);
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
         }
@@ -162,7 +174,8 @@ function CheckWin() {
     }
 
     if (diagonal2Winner) {
-        alert("勝者は " + cell4.innerText + " です!");
+        let winner = cell4.innerText;
+        displayVictoryMessage(winner);
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
         }
@@ -189,16 +202,35 @@ function CheckDraw() {
     }
 
     if (isDraw && !gameEnded) {
-        alert("引き分けです！");
         // ゲーム終了
+        displayDrawMessage();
         gameEnded = false;
     }
 }
 
-
-
+function displayVictoryMessage(winner) {
+    const victoryMessage = document.getElementById("victory-message");
+    const winnerMessage = document.getElementById("winner-message");
+  
+    winnerMessage.textContent = winner + " が勝者です！";
+    victoryMessage.style.display = "block";
+    NB.style.display = "block";
+    banmen.style.display = "none";
+    Rb.style.display = "none";
+  }
+  
+  function displayDrawMessage() {
+    drawMessage.style.display = "block";
+    NB.style.display = "block";
+    banmen.style.display = "none";
+    Rb.style.display = "none";
+  }
+  
 function init(){
     //最初に行う処理を書く
+    //ゲーム開始時にテーブルを表示する
+    banmen.style.display = "inline-block";
+    Rb.style.display = "inline-block";
     insertCharacter(currentPlayer);
 }
 

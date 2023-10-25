@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <table id="banmen" align="center">
+    <div>
+    <table id="banmen">
         <tr>
             <td><span class="moji"></span></td>
             <td><span class="moji"></span></td>
@@ -24,11 +25,19 @@
             <td><span class="moji"></span></td>
             <td><span class="moji"></span></td>
         </tr>
-
     </table>
-
+    </div>
+    <div id="victory-message" style="display: none;">
+        <h2 id="winner-message"></h1>
+    </div>
+    <div id="draw-message" style="display: none;">
+        <h2>引き分けです。</h2>
+    </div>
     <div>
-    <button type="button" name="reset" id="Reset Button">Reset Button!</button>
+        <button type="button" name="reset" id="ResetButton">Reset Button!</button>
+    </div>
+    <div>
+        <button type="button" id="NewGame">New Game!</button>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
