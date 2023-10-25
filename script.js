@@ -123,17 +123,17 @@ function CheckWin() {
     //縦横同時勝利の時の判定
     if(horizontalWinner && verticalWinner){
         let winner = horizontalWinner || verticalWinner;
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
 
         gameEnded = true;
     }else if(horizontalWinner){         //横方向の勝利の時
         let winner = horizontalWinner
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
 
         gameEnded = true;
     }else if(verticalWinner){           //縦方向の勝利の時
         let winner = verticalWinner
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
 
         gameEnded = true;
     }
@@ -160,7 +160,7 @@ function CheckWin() {
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
         }
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
         gameEnded = true;
         return;
     }
@@ -170,7 +170,7 @@ function CheckWin() {
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
         }
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
         gameEnded = true;
         return;
     }
@@ -180,7 +180,7 @@ function CheckWin() {
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
         }
-        setTimeout(displayVictoryMessage,1000,winner);
+        delay(winner);
         gameEnded = true;
         return;
     }
@@ -225,6 +225,10 @@ function displayVictoryMessage(winner) {
     NB.style.display = "block";
     banmen.style.display = "none";
     Rb.style.display = "none";
+  }
+
+  function delay(winner){
+    setTimeout(displayVictoryMessage,1000,winner);
   }
   
 function init(){
