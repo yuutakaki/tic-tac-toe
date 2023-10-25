@@ -69,9 +69,11 @@ function Reset(){
 let NB = document.getElementById("NewGame");
 NB.addEventListener("click",NewGame);
 let drawMessage = document.getElementById("draw-message");
+let victoryMessage = document.getElementById("victory-message");
 
 function NewGame(){
     drawMessage.style.display = "none";
+    victoryMessage.style.display = "none";
     NB.style.display = "none";
 
     init();
@@ -209,7 +211,6 @@ function CheckDraw() {
 }
 
 function displayVictoryMessage(winner) {
-    const victoryMessage = document.getElementById("victory-message");
     const winnerMessage = document.getElementById("winner-message");
   
     winnerMessage.textContent = winner + " が勝者です！";
