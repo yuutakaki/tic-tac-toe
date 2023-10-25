@@ -123,17 +123,17 @@ function CheckWin() {
     //縦横同時勝利の時の判定
     if(horizontalWinner && verticalWinner){
         let winner = horizontalWinner || verticalWinner;
-        displayVictoryMessage(winner);
+        setTimeout(displayVictoryMessage,1000,winner);
 
         gameEnded = true;
     }else if(horizontalWinner){         //横方向の勝利の時
         let winner = horizontalWinner
-        displayVictoryMessage(winner);
+        setTimeout(displayVictoryMessage,1000,winner);
 
         gameEnded = true;
     }else if(verticalWinner){           //縦方向の勝利の時
         let winner = verticalWinner
-        displayVictoryMessage(winner);
+        setTimeout(displayVictoryMessage,1000,winner);
 
         gameEnded = true;
     }
@@ -156,31 +156,31 @@ function CheckWin() {
 
     if(diagonal1Winner && diagonal2Winner){
         let winner = cell5.innerText;
-        displayVictoryMessage(winner);
         for(let i = 0; i < 3; i++){
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
         }
+        setTimeout(displayVictoryMessage,1000,winner);
         gameEnded = true;
         return;
     }
 
     if (diagonal1Winner) {
         let winner = cell1.innerText;
-        displayVictoryMessage(winner);
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
         }
+        setTimeout(displayVictoryMessage,1000,winner);
         gameEnded = true;
         return;
     }
 
     if (diagonal2Winner) {
         let winner = cell4.innerText;
-        displayVictoryMessage(winner);
         for (let i = 0; i < 3; i++) {
             banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
         }
+        setTimeout(displayVictoryMessage,1000,winner);
         gameEnded = true;
         return;
     }
@@ -205,7 +205,7 @@ function CheckDraw() {
 
     if (isDraw && !gameEnded) {
         // ゲーム終了
-        displayDrawMessage();
+        setTimeout(displayDrawMessage,1000);
         gameEnded = false;
     }
 }
