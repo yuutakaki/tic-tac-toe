@@ -79,109 +79,69 @@ function NewGame(){
 
 //勝利判定
 function CheckWin() {
-    // 横方向の勝利チェック
+    const winningCombinations = [
+        // 横方向の勝利パターン
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        // 縦方向の勝利パターン
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        // 斜め方向の勝利パターン
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
 
-    let horizontalWinner = null;
-    let verticalWinner = null;
+    // 関数を使って、同時勝利を判定する
+    function checkCombination(combination) {
+        const [a, b, c] = combination;
+        const cellA = banmen.rows[Math.floor(a / 3)].cells[a % 3];
+        const cellB = banmen.rows[Math.floor(b / 3)].cells[b % 3];
+        const cellC = banmen.rows[Math.floor(c / 3)].cells[c % 3];
 
-    for (let row = 0; row < 3; row++) {
-        const cell1 = banmen.rows[row].cells[0];
-        const cell2 = banmen.rows[row].cells[1];
-        const cell3 = banmen.rows[row].cells[2];
+        if (cellA.classList.contains('pressed') &&
+            cellB.classList.contains('pressed') &&
+            cellC.classList.contains('pressed') &&
+            cellA.innerText === cellB.innerText &&
+            cellB.innerText === cellC.innerText) {
+        //勝者の処理
+        for (const cellIndex of combination) {
+            const row = Math.floor(cellIndex / 3);
+            const col = cellIndex % 3;
+            const winningCell = banmen.rows[row].cells[col];
+            winningCell.classList.add('winning-cell');
+        }
 
-        if (cell1.classList.contains('pressed') && cell2.classList.contains('pressed') && cell3.classList.contains('pressed')) {
-            if (cell1.innerText === cell2.innerText && cell2.innerText === cell3.innerText) {
-                horizontalWinner = cell1.innerText;
-                for (let i = 0; i < 3; i++) {
-                    banmen.rows[row].cells[i].classList.add('winning-cell');
-                }
+        delay(cellA.innerText);
+        gameEnded = true;
+    }
+    return false;
+        
+    }
+
+    let winner = null;
+    for (const combination of winningCombinations) {
+        const result = checkCombination(combination);
+        if (result) {
+            if (winner) {
+                // 既に勝者がいる場合、同時勝利と判定
+                delay(result);
+                gameEnded = true;
+                return;
             }
+            winner = result;
         }
     }
 
-
-    // 縦方向の勝利チェック
-    for (let col = 0; col < 3; col++) {
-        const cell1 = banmen.rows[0].cells[col];
-        const cell2 = banmen.rows[1].cells[col];
-        const cell3 = banmen.rows[2].cells[col];
-
-        if (cell1.classList.contains('pressed') && cell2.classList.contains('pressed') && cell3.classList.contains('pressed')) {
-            if (cell1.innerText === cell2.innerText && cell2.innerText === cell3.innerText) {
-                verticalWinner = cell1.innerText;
-                for (let i = 0; i < 3; i++) {
-                    banmen.rows[i].cells[col].classList.add('winning-cell');
-                }
-
-            }
-        }
-    }
-    //縦横同時勝利の時の判定
-    if(horizontalWinner && verticalWinner){
-        let winner = horizontalWinner || verticalWinner;
+    if (winner) {
+        // 勝者が1人の場合
         delay(winner);
-
-        gameEnded = true;
-    }else if(horizontalWinner){         //横方向の勝利の時
-        let winner = horizontalWinner
-        delay(winner);
-
-        gameEnded = true;
-    }else if(verticalWinner){           //縦方向の勝利の時
-        let winner = verticalWinner
-        delay(winner);
-
         gameEnded = true;
     }
-
-    // 斜め方向の勝利チェック
-    const cell1 = banmen.rows[0].cells[0];
-    const cell2 = banmen.rows[1].cells[1];
-    const cell3 = banmen.rows[2].cells[2];
-    const cell4 = banmen.rows[0].cells[2];
-    const cell5 = banmen.rows[1].cells[1];
-    const cell6 = banmen.rows[2].cells[0];
-
-    //左上から右下の勝利判定
-    const diagonal1Winner = cell1.classList.contains('pressed') && cell2.classList.contains('pressed') && cell3.classList.contains('pressed') &&
-    cell1.innerText === cell2.innerText && cell2.innerText === cell3.innerText;
-
-    // 右上から左下の勝利判定
-    const diagonal2Winner = cell4.classList.contains('pressed') && cell5.classList.contains('pressed') && cell6.classList.contains('pressed') &&
-    cell4.innerText === cell5.innerText && cell5.innerText === cell6.innerText;
-
-    if(diagonal1Winner && diagonal2Winner){
-        let winner = cell5.innerText;
-        for(let i = 0; i < 3; i++){
-            banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
-            banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
-        }
-        delay(winner);
-        gameEnded = true;
-        return;
-    }
-
-    if (diagonal1Winner) {
-        let winner = cell1.innerText;
-        for (let i = 0; i < 3; i++) {
-            banmen.rows[i].cells[i].classList.add('winning-cell'); // 左上から右下
-        }
-        delay(winner);
-        gameEnded = true;
-        return;
-    }
-
-    if (diagonal2Winner) {
-        let winner = cell4.innerText;
-        for (let i = 0; i < 3; i++) {
-            banmen.rows[i].cells[2 - i].classList.add('winning-cell'); // 右上から左下
-        }
-        delay(winner);
-        gameEnded = true;
-        return;
-    }
- 
 }
+
+
 
 function CheckDraw() {
     // ゲームボードが全てのセルで埋まっているか確認
