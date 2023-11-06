@@ -1,17 +1,13 @@
 const banmen = document.getElementById("banmen");
 
 //tableのクリックした場所を取得
-for(let x = 0;x<3;x++){
-    for(let y=0;y<3;y++){
-        const Click = banmen.rows[x].cells[y];
-        Click.onclick = function(){
-            //ゲームの勝者が決まった後か確認する。
-            if(!gameEnded) {
-                Osita(this);
-            }
+document.querySelectorAll("#banmen td").forEach(function(ban){
+    ban.addEventListener("click",function(){
+        if(!gameEnded){
+            Osita(this);
         }
-    }
-}
+    })
+})
 
 let gameEnded = false;
 let currentPlayer = "O";
